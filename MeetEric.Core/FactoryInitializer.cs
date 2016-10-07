@@ -15,8 +15,12 @@
 
         public static void Initialize()
         {
-            MeetEricFactory.RegisterService<ILoggingService>(() => new SimpleFrameworkLogger());
-            MeetEricFactory.RegisterService<IIdentityFactory>(() => new IdentifierFactory());
+            if (!IsInitialized)
+            {
+                IsInitialized = true;
+                MeetEricFactory.RegisterService<ILoggingService>(() => new SimpleFrameworkLogger());
+                MeetEricFactory.RegisterService<IIdentityFactory>(() => new IdentifierFactory());
+            }
         }
     }
 }
